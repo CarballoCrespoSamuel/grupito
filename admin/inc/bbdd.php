@@ -333,7 +333,60 @@
 		return $row;
 	}
 	
+	//Funcion para actualizar PRODUCTO
+	function actualizarProducto($idProducto, $nombre, $introDescripcion, $descripcion, $imagen, $precio, $precioOferta, $online){
+		
+		$con = conectarBD();
+		
+		try{
+			$sql="UPDATE productos SET idProducto=:idProducto, nombre=:nombre,introDescripcion=:introDescripcion ,
+			descripcion=:descripcion, imagen=:imagen, precio=:precio, precioOferta=:precioOferta, online=:online 
+			WHERE idProducto=:idProducto";
+			//NO PONGAS ESPACIOS CON EL =:
+			$stmt=$con->prepare($sql);
+			
+			
+			$stmt->bindParam(':idProducto',$idProducto);
+			$stmt->bindParam(':nombre',$nombre);
+			$stmt->bindParam(':introDescripcion',$introDescripcion);
+			$stmt->bindParam(':descripcion',$descripcion);
+			$stmt->bindParam(':imagen',$imagen);
+			$stmt->bindParam(':precio',$precio);
+			$stmt->bindParam(':precioOferta',$precioOferta);
+			$stmt->bindParam(':online',$online);
+			$stmt->execute();
+		}
+		catch(PDOException $e){
+			echo "ERROR al actualizar Producto:".$e->getMessage();	
+			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
+			exit;
+		}
+		return $stmt->rowCount();
+	}
 
+	//Funcion para borrar tarea 
+	function eliminarProducto($idTarea){
+		$con=conectarBD();
+		
+		try{
+			//Crear la sentencia
+			$sql="DELETE from tareas where idTarea=:idTarea";
+			//Preparamos la sentencia y creamos stmt
+			$stmt = $con->prepare($sql);
+			//Vinculamos los campos
+			$stmt->bindParam(':idTarea',$idTarea);
+			//Ejecutamos
+			$stmt->execute();
+		}
+		catch(PDOException $e){
+			echo "ERROR al eliminar Tarea:".$e->getMessage();	
+			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
+			exit;
+		}
+		return $stmt->rowCount();
+	}
+	
+	
 ?>	
 
 

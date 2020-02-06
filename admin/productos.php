@@ -55,7 +55,7 @@ if(isset($_SESSION["usuario"])){
 			<td><strike><?php echo "$precio";?>€</strike></td>
 			<td><?php echo "$precioOferta";?>€</td>
 			<!--Hacer una pagina aparte para actulizar y para "borrar"(online 0)-->
-			<td><a href="actualizar.php" class='btn btn-success' role='alert'>Editar</a></td>
+			<td><a href="<?php echo "actualizar.php?idProducto="."$idProducto"?>" class='btn btn-success' role='alert'>Editar</a></td>
 			<td><a href="borrar.php?idProducto=<?php echo $idProducto;?>" onClick="return confirmar('¿Realmente quieres borrar el producto?');" class='btn btn-danger' role='alert'>Borrar</a></td>
 		</tr>
 	<?php 

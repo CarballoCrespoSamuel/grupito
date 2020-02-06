@@ -6,7 +6,7 @@ function mostrarProductos($productos){?>
 
 <?php foreach($productos as $producto){ ?>
   <div class="col mb-4">
-    <div class="card">
+    <div class="card h-100">
       <img src="imagenes/<?php echo $producto["imagen"];?>" class="card-img-top" alt="imagenes/<?php echo $producto["imagen"];?>">
       <div class="card-body">
         <h5 class="card-title"><?php echo $producto["nombre"]; ?></h5>
