@@ -1,7 +1,10 @@
 <?php session_start();
 require_once ("inc/bbdd.php");
+$pagina="productos";
+$titulo="Todas Nuestras Ofertas";
 require_once ("inc/encabezado.php"); 
 require_once ("inc/funciones.php");
+
 if(isset($_SESSION["usuario"])){ 
 	
 	$productos=seleccionarTodosProductos();

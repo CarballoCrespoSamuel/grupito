@@ -1,5 +1,9 @@
-<?php require_once("inc/encabezado.php");?>
-<?php require_once("inc/bbdd.php");?>
+<?php session_start(); ?>
+
+<?php require_once("inc/bbdd.php");
+$pagina="productos";
+$titulo="Ofertas";//Ahora deben ir en este orden porque sino la variable "$titulo" no existiría en nuestro encabezado y demas
+require_once("inc/encabezado.php");?>
 <?php require_once("inc/configuracion.php");?>
 <?php require_once("inc/funciones.php");?>
 

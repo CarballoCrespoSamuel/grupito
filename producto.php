@@ -1,10 +1,15 @@
-<?php require_once("inc/encabezado.php");?>
-<?php require_once("inc/bbdd.php");?>
-<?php require_once("inc/configuracion.php");?>
-<?php require_once("inc/funciones.php");?>
+<?php session_start(); ?>
 
+<?php require_once("inc/funciones.php");?>
+<?php require_once("inc/bbdd.php");?>
 <?php 
+$pagina="productos";
+$titulo="Producto";
+
 $idProducto = recoge('idProducto');
+if($idProducto==0){
+	$idProducto=1;
+}
 $producto=seleccionarProducto($idProducto);
 
 $nombre=$producto["nombre"];
@@ -15,12 +20,17 @@ $precio=$producto["precio"];
 $precioOferta=$producto["precioOferta"];
 $online=$producto["online"];
 ?>
+<?php require_once("inc/encabezado.php");?>
+<?php require_once("inc/configuracion.php");?>
+
+
 
 <main role="main">
 
   <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
     <div class="container">
+	
       <h1 class="display-3"><?php echo $nombre; ?></h1>
     </div>
   </div>

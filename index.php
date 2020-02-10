@@ -1,7 +1,11 @@
-<?php require_once("inc/encabezado.php");?>
-<?php require_once("inc/bbdd.php");?>
-<?php require_once("inc/configuracion.php");?>
-<?php require_once("inc/funciones.php");?>
+<?php session_start(); ?>
+
+<?php require_once("inc/bbdd.php");
+$pagina="index";
+$titulo="Inicio";
+require_once("inc/encabezado.php");
+require_once("inc/configuracion.php");
+require_once("inc/funciones.php");?>
 
 <?php $productos = seleccionarOfertasPortada(NUMOFERTAS);?>
 
