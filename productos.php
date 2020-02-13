@@ -19,8 +19,7 @@ require_once("inc/encabezado.php");?>
 
   <div class="container">
    
-	
-	<?php mostrarProductos($productos); ?>
+   <?php mostrarProductos($productos); ?>
 	
 	
     <hr>

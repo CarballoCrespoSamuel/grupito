@@ -332,6 +332,52 @@
 		}
 		return $row;
 	}
+	
+	//Función para insertar un usuario con su contraseña EN GRUPITO
+	function insertarUsuarioGrupito($email,$password,$nombre,$apellidos,$direccion,$telefono){
+		$con=conectarBD();
+		try{
+			$password=password_hash($password, PASSWORD_DEFAULT);
+			$sql="INSERT INTO usuarios(email,password,nombre,apellidos,direccion,telefono) VALUES(:email,:password,:nombre,:apellidos,:direccion,:telefono)";
+			
+			$stmt = $con->prepare($sql);
+			
+			$stmt->bindParam(':email',$email);
+			$stmt->bindParam(':password',$password);
+			$stmt->bindParam(':nombre',$nombre);
+			$stmt->bindParam(':apellidos',$apellidos);
+			$stmt->bindParam(':direccion',$direccion);
+			$stmt->bindParam(':telefono',$telefono);
+			
+			$stmt->execute();
+		}
+		catch(PDOException $e){
+			echo "ERROR al Insertar usuario:".$e->getMessage();	
+			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
+			exit;
+		}
+
+	}
+	
+	
+	//Funcion para seleccionar un usuario GRUPITO
+	function seleccionarEmail($email){
+		$con=conectarBD();
+		try{
+			$sql="SELECT * from usuarios where email=:email";
+			$stmt = $con->prepare($sql);
+			$stmt->bindParam(':email',$email);
+			$stmt->execute();
+			//Usamos fetch para UNA FILA y fetchAll para VARIAS FILAS
+			$row=$stmt->fetch(PDO::FETCH_ASSOC);
+		}
+		catch(PDOException $e){
+			echo "ERROR al iniciar sesión:".$e->getMessage();	
+			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
+			exit;
+		}
+		return $row;
+	}
 ?>	
 
 

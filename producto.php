@@ -7,10 +7,15 @@ $pagina="productos";
 $titulo="Producto";
 
 $idProducto = recoge('idProducto');
-if($idProducto==0){
+
+$todoProductos=seleccionarTodosProductos();
+$cantProds=count($todoProductos);
+
+if($idProducto==0 or $idProducto>$cantProds){
 	$idProducto=1;
 }
 $producto=seleccionarProducto($idProducto);
+
 
 $nombre=$producto["nombre"];
 $introDescripcion=$producto["introDescripcion"];
@@ -22,8 +27,6 @@ $online=$producto["online"];
 ?>
 <?php require_once("inc/encabezado.php");?>
 <?php require_once("inc/configuracion.php");?>
-
-
 
 <main role="main">
 
@@ -41,8 +44,8 @@ $online=$producto["online"];
 		<div class="col-6">
 			<p><?php echo $descripcion; ?></p>
 			<div class="col-12 mx-auto d-flex justify-content-center">
-				<a href="carrito.php" class="btn btn-success text-justify">Añadir al carrito</a>
-			</div>
+				<a href="procesarCarrito.php?id=<?php echo $idProducto;  ?>&op=add" class="btn btn-success text-justify">Añadir al carrito</a>
+			</div><?php //Para que sepa que tiene que hacer la operación de añadir al carrito ?>
 		</div>
 		<div class="col-6">
 			<img src="imagenes/<?php echo $imagen; ?>" alt="<?php echo $nombre?>" class="card-img-top rounded">

@@ -26,6 +26,40 @@
 	<meta name="theme-color" content="#563d7c">
 
 
+
+	<?php  if($pagina=="crearUsuario"){?>
+   <script src='https://www.google.com/recaptcha/api.js?render=<?php echo CLAVE_SITIO_WEB; ?>'></script>
+    <script>
+		grecaptcha.ready(function() {
+		grecaptcha.execute('<?php echo CLAVE_SITIO_WEB; ?>', {action: 'formulario'})
+		.then(function(token) {
+		var recaptchaResponse = document.getElementById('recaptchaResponse');
+		recaptchaResponse.value = token;
+		});});
+    </script>
+
+	<?php } ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -44,6 +78,7 @@
     </style>
     <!-- Custom styles for this template -->
     <link href="./css/jumbotron.css" rel="stylesheet">
+	
   </head>
   <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -86,7 +121,7 @@
 		}else{
 		?>
 			<li class="nav-item">
-				<button href="login.php" class="btn btn-outline-success my-2 my-sm-0" type="submit">Identifícate</button>
+				<a  class="btn btn-outline-success my-2 my-sm-0" type="submit" href="login.php">Identifícate</a>
 			</li>
 		<?php } ?>
 		</ul>

@@ -1,11 +1,11 @@
-<?php session_start();
+<?php session_start();?>
 <?php require_once("inc/encabezado.php");?>
-<?php require_once("inc/bbdd.php");?>
-<?php 
+<?php require_once("inc/bbdd.php");
+ 
 $pagina="index";
 $titulo="Mi Grupito";
 
-<?php require_once("inc/configuracion.php");?>
+require_once("inc/configuracion.php");?>
 <?php require_once("inc/funciones.php");?>
 
 $pagina="";
