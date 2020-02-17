@@ -27,7 +27,7 @@ require_once("inc/funciones.php");
 		$mensaje="Carrito vacío";
 		mostrarMensaje($mensaje);
 	}else{
-		
+
 ?>
 
   <div class="container">
