@@ -22,8 +22,6 @@ require_once ("inc/funciones.php");
 				<input type="password" class="form-control" name="repePassword" id="repePassword">
 			</div>
 			
-			
-			
 			<div class="form-group">
 				<label for="nombre">Nombre</label><br/>
 				<input type="nombre" class="form-control" name="nombre" id="nombre" maxlength="24" autofocus>
@@ -41,7 +39,7 @@ require_once ("inc/funciones.php");
 				<input type="telefono" class="form-control" name="telefono" id="telefono" maxlength="24" autofocus>
 			</div>
 			
-			<input type="text" name="recaptcha_response" id="recaptcha_response">
+			<input type="submit" name="recaptcha_response" id="recaptcha_response">
 			
 			<button type="submit" class="btn btn-primary">Enviar</button></br>
 			<a href="login.php"> Iniciar Sesión </a>		

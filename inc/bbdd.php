@@ -378,6 +378,44 @@
 		}
 		return $row;
 	}
+	
+	function insertarPedido($idUsuario, $detallePedido, $total){
+		$con=conectarBD();
+		try{
+			$conexion -> beginTransaction();//Necesito crear una transaccion por si da error, que pueda hacer ROLLBACK
+			$sql="INSERT INTO pedidos(idUsuario, total) VALUES(:idUsuario,:total)";
+			$sentencia = $conexion -> prepare($sql);
+		
+			$stmt->bindParam(':idUsuario',$idUsuario);
+			$stmt->bindParam(':total',$total);
+
+			$stmt->execute();
+			$idPedido=$conexion->lastInsertId();
+			
+			foreach($detallePedido as $idProducto => $cantidad){
+				$producto=seleccionarProducto($idProducto);
+				$precio=$producto["precioOferta"];
+				$sql2= "INSERT INTO detallePedido(idPedido,idProducto,cantidad, precio) VALUES(:idPedido,:idProducto,:cantidad,:precio)";
+				
+				$sentencia = $conexion -> prepare($sql);
+		
+				$stmt->bindParam(':idPedido',$idPedido);
+				$stmt->bindParam(':idProducto',$idProducto);
+				$stmt->bindParam(':cantidad',$cantidad);
+				$stmt->bindParam(':precio',$precio);
+				$stmt->execute();
+				
+			}
+			$conexion -> commit();
+		}
+		catch(PDOException $e){
+			$conexion -> rollback();
+			echo "ERROR al Insertar pedido:".$e->getMessage();	
+			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
+			exit;
+		}
+		return $idPedido;
+	}
 ?>	
 
 
