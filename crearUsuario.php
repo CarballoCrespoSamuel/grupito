@@ -86,8 +86,6 @@ else{
  
 		}
 	
-
-
 	echo "<h1>CREAR USUARIO</h1>";
 	if(empty ($password) or empty($email) or empty($repePassword)){
 		echo "ERROR. Debe introducir todos los datos.";

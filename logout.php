@@ -1,6 +1,5 @@
 <?php session_start(); ?>
 
-
 <?php require_once("inc/bbdd.php");
 $pagina="logout";
 $titulo="Cerrar Sesión";

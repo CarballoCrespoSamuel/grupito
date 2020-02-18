@@ -7,38 +7,38 @@ require_once("inc/encabezado.php");
 require_once("inc/configuracion.php");
 require_once("inc/funciones.php");?>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Email</th>
-	  <th scope="col">Password</th>
-      <th scope="col">Nombre</th>
-	  <th scope="col">Apellidos</th>
-      <th scope="col">Direccion</th>
-	  <th scope="col">Teléfono</th>
-    </tr>
-  </thead>
-  <tbody>
+
   	<?php
 	$email=$_SESSION["email"];
 	$datos=seleccionarEmail($email);
 	
 	$email=$datos["email"];
-	$password=$datos["email"];
-	$nombre=$datos["email"];
-	$apellidos=$datos["email"];
-	$direccion=$datos["email"];
-	$teléfono=$datos["email"];	
+	$nombre=$datos["nombre"];
+	$apellidos=$datos["apellidos"];
+	$direccion=$datos["direccion"];
+	$telefono=$datos["telefono"];	
 	
 	?>
-			<tr>
-			  <td><?php echo "$mail";?></td>
-			  <td><?php //echo "$pass";?></td>
-			  <td><?php echo "$mail" ?></td>
-			  <td><?php ?></td>
-			  <td><?php ?></td>
-			  <td><?php ?></td>
-			</tr>
-	</tbody>
-</table>
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Mis Datos</h1>
+			
+			<ul class="list-group list-group-flush">
+			
+			<hr/>
+				<li class="list-group-item"><strong>Email: </strong> <?php echo $email; ?></li>
+				<li class="list-group-item"><strong>Nombre: </strong><?php echo $nombre ;?></li>
+				<li class="list-group-item"><strong>Apellidos: </strong> <?php echo $apellidos ;?></li>
+				<li class="list-group-item"><strong>Dirección: </strong> <?php echo $direccion ;?></li>
+				<li class="list-group-item"><strong>Teléfono: </strong> <?php echo $telefono; ?></li>
+			</ul>
+			
+		</div>
+		<div>
+			<a href="editarMisDatos.php" class="btn btn-primary ml-3">Editar</a>
+			<a href="productos.php" class="btn btn-success ml-3">Volver a productos</a>
+		</div>
+	</div>
+
+
 <?php require_once("inc/pie.php");?>
