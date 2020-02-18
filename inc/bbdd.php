@@ -337,7 +337,7 @@
 	function insertarUsuarioGrupito($email,$password,$nombre,$apellidos,$direccion,$telefono){
 		$con=conectarBD();
 		try{
-			$password=password_hash($password, PASSWORD_DEFAULT);
+			//$password=password_hash($password, PASSWORD_DEFAULT);
 			$sql="INSERT INTO usuarios(email,password,nombre,apellidos,direccion,telefono) VALUES(:email,:password,:nombre,:apellidos,:direccion,:telefono)";
 			
 			$stmt = $con->prepare($sql);
@@ -378,6 +378,7 @@
 		}
 		return $row;
 	}
+	
 	
 	function insertarPedido($idUsuario, $detallePedido, $total){
 		$con=conectarBD();

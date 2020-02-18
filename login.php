@@ -1,3 +1,6 @@
+<?php session_start(); ?>
+
+
 <?php require_once("inc/bbdd.php");
 $pagina="login";
 $titulo="Iniciar Sesión";
@@ -22,7 +25,7 @@ function mostrarLogin($email){
 	  </div>
 	  <div class="form-group">
 		<label for="exampleInputPassword1">Contraseña</label>
-		<input type="password" class="form-control" name="password" id="exampleInputPassword1">
+		<input type="password" class="form-control" name="pass" id="pass">
 	  </div>
 	  <button type="submit" class="btn btn-primary">Enviar</button>
 	  <p>¿No tienes cuenta todavía?<a href="crearUsuario.php"> Regístrate</a></p>
@@ -31,23 +34,25 @@ function mostrarLogin($email){
 <?php }
 
 if(empty($_REQUEST)){
-		$email="";
-		mostrarLogin($email);
+		if(isset($_SESSION["email"])){
+			header('Location: index.php');
+		}else{
+			$email="";
+			mostrarLogin($email);
+		}
 	}
 	else{
 		$email=$_REQUEST["email"];
-		$password=$_REQUEST["password"];
+		$pass=$_REQUEST["pass"];
 		
 		//SELECCIONAR LA LINEA DONDE SE ENCUENTRA EL USUARIO Y VERIFICAR QUE LAS CREDENCIALES SON CORRECTAS
 		$resultado=seleccionarEmail($email);
 		
-		print_r($resultado);
+		$userOK=password_verify("abc123.",$resultado['password']);
 		
-		$userOK=password_verify($password, $resultado['password']);
-	
 		if($userOK){
 			//Las credenciales son correctas 
-			$_SESSION["email"]=$resultado['email'];
+			$_SESSION["email"]=$resultado["email"];
 			header('Location: index.php');?>
 		<?php
 		}else{

@@ -40,26 +40,6 @@
 
 	<?php } ?>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -108,9 +88,9 @@
 		  </li>
 		  
 		  <?php 
-		if(isset($_SESSION["usuario"])){ //Para que aparezca una cosa si hay un usuario logeado u otra si no lo hay ?>
+		if(isset($_SESSION["email"])){ //Para que aparezca una cosa si hay un usuario logeado u otra si no lo hay ?>
 			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bienvenido Fulanito</a>
+				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['email']; ?></a>
 				<div class="dropdown-menu" aria-labelledby="dropdown01">
 				<a class="dropdown-item" href="misDatos.php">Mis Datos</a>
 				<a class="dropdown-item" href="misPedidos.php">Mis Pedidos</a>

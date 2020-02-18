@@ -108,3 +108,5 @@
 13 February, 2020, 1:59 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'asaa@gmail.com' for key 'email'
 13 February, 2020, 2:00 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'asaa@gmail.com' for key 'email'
 17 February, 2020, 6:27 pm SQLSTATE[HY000] [1049] Unknown database 'grupito'
+18 February, 2020, 4:39 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'correo@correo' for key 'email'
+18 February, 2020, 4:48 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'a@aa' for key 'email'

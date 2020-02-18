@@ -10,20 +10,31 @@ require_once("inc/funciones.php");?>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">Usuario</th>
-	  <th scope="col">Contraseña</th>
-      <th scope="col">Correo</th>
-	  <th scope="col">Dirección</th>
-      <th scope="col">Código Postal</th>
+      <th scope="col">Email</th>
+	  <th scope="col">Password</th>
+      <th scope="col">Nombre</th>
+	  <th scope="col">Apellidos</th>
+      <th scope="col">Direccion</th>
+	  <th scope="col">Teléfono</th>
     </tr>
   </thead>
   <tbody>
-  	<?php //FOREACH usuarios
+  	<?php
+	$email=$_SESSION["email"];
+	$datos=seleccionarEmail($email);
+	
+	$email=$datos["email"];
+	$password=$datos["email"];
+	$nombre=$datos["email"];
+	$apellidos=$datos["email"];
+	$direccion=$datos["email"];
+	$teléfono=$datos["email"];	
+	
 	?>
 			<tr>
-			  <td><?php //echo "$usu";?></td>
+			  <td><?php echo "$mail";?></td>
 			  <td><?php //echo "$pass";?></td>
-			  <td><?php ?></td>
+			  <td><?php echo "$mail" ?></td>
 			  <td><?php ?></td>
 			  <td><?php ?></td>
 			  <td><?php ?></td>

@@ -32,6 +32,7 @@ foreach($_SESSION['carrito'] as $id => $cantidad){
 		<p>
 			<?php echo "<h1>Va a realizar el pedido de:  $total €</h1>";?>
 			<a href="pedidoConfirmado.php" class="btn btn-success ml-3">Confirmar Pedido</a>
+			
 		</p>
 	</div>
 </main>

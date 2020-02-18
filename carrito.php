@@ -74,7 +74,8 @@ require_once("inc/funciones.php");
 
 		<a href="procesarCarrito.php?id=<?php echo "$id"; ?>&op=empty" class="btn btn-danger">Vaciar Carrito</a>
 		<a href="confirmarPedido.php" class="btn btn-success ml-3">Confirmar Pedido</a>
-  
+		
+
 
    <hr>
   </div> <!-- /container -->
