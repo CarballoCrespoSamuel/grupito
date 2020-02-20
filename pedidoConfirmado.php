@@ -9,13 +9,27 @@ require_once("inc/encabezado.php");
 require_once("inc/funciones.php");
 
 
+$total=0;
+foreach($_SESSION['carrito'] as $id => $cantidad){
+		$producto=seleccionarProducto($id);
+		$nombre=$producto["nombre"];
+		$precioOferta=$producto["precioOferta"];
+		$subtotal=$precioOferta*$cantidad;
 
-$idUsuario=recoge("idUsuario");
-$id=recoge("idProducto");
+		$total=$total+$subtotal;
+		?>
+		<li class="list-group-item"><?php echo "<strong>$nombre</strong> "."($cantidad unidades)" ; ?></li>		
+		
+	<?php 
 
+}
+$email=$_SESSION["email"];
+$mail=seleccionarEmail($email);
+$idUsuario=$mail["idUsuario"];
+$precio=$subtotal;
+$detallePedido=$_SESSION["carrito"];
 
-//$pedido=insertarPedido($idUsuario, $detallePedido, $total);
-
+$idPedido=insertarPedido($idUsuario, $detallePedido, $total);
 
 ?>
 <div align="center">

@@ -381,41 +381,63 @@
 	
 	
 	function insertarPedido($idUsuario, $detallePedido, $total){
-		$con=conectarBD();
+		$conexion=conectarBD();
 		try{
 			$conexion -> beginTransaction();//Necesito crear una transaccion por si da error, que pueda hacer ROLLBACK
 			$sql="INSERT INTO pedidos(idUsuario, total) VALUES(:idUsuario,:total)";
-			$sentencia = $conexion -> prepare($sql);
+			$stmt = $conexion -> prepare($sql);
 		
-			$stmt->bindParam(':idUsuario',$idUsuario);
+			$stmt->bindParam( ':idUsuario',$idUsuario);
 			$stmt->bindParam(':total',$total);
 
 			$stmt->execute();
 			$idPedido=$conexion->lastInsertId();
+			
 			
 			foreach($detallePedido as $idProducto => $cantidad){
 				$producto=seleccionarProducto($idProducto);
 				$precio=$producto["precioOferta"];
 				$sql2= "INSERT INTO detallePedido(idPedido,idProducto,cantidad, precio) VALUES(:idPedido,:idProducto,:cantidad,:precio)";
 				
-				$sentencia = $conexion -> prepare($sql);
+				$sentencia = $conexion -> prepare($sql2);
 		
-				$stmt->bindParam(':idPedido',$idPedido);
-				$stmt->bindParam(':idProducto',$idProducto);
-				$stmt->bindParam(':cantidad',$cantidad);
-				$stmt->bindParam(':precio',$precio);
-				$stmt->execute();
+				$sentencia->bindParam(':idPedido',$idPedido);
+				$sentencia->bindParam(':idProducto',$idProducto);
+				$sentencia->bindParam(':cantidad',$cantidad);
+				$sentencia->bindParam(':precio',$precio);
+				
+				$sentencia->execute();
 				
 			}
 			$conexion -> commit();
 		}
 		catch(PDOException $e){
 			$conexion -> rollback();
-			echo "ERROR al Insertar pedido:".$e->getMessage();	
+			echo "ERROR al Insertar pedido: ".$e->getMessage();	
 			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
 			exit;
 		}
 		return $idPedido;
+	}
+	
+	
+	//Funcion para seleccionar pedidos GRUPITO
+	function seleccionarPedido($idUsuario){
+		$con=conectarBD();
+		try{
+			$sql="SELECT * from pedidos where idUsuario=:idUsuario";
+			$stmt = $con->prepare($sql);
+			$stmt->bindParam(':idUsuario',$idUsuario);
+			$stmt->execute();
+			//Usamos fetch para UNA FILA y fetchAll para VARIAS FILAS
+			$row=$stmt->fetch(PDO::FETCH_ASSOC);
+		}
+		catch(PDOException $e){
+			echo "ERROR al iniciar sesión:".$e->getMessage();	
+			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
+			exit;
+		}
+		return $row;
 	}
 ?>	
 

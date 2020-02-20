@@ -22,7 +22,7 @@ require_once("inc/funciones.php");?>
 	<div class="jumbotron">
 		<div class="container">
 			<h1>Mis Datos</h1>
-			
+			<hr/>
 			<ul class="list-group list-group-flush">
 			
 			<hr/>
@@ -34,11 +34,12 @@ require_once("inc/funciones.php");?>
 			</ul>
 			
 		</div>
-		<div>
+		
+	</div>
+	<div>
 			<a href="editarMisDatos.php" class="btn btn-primary ml-3">Editar</a>
 			<a href="productos.php" class="btn btn-success ml-3">Volver a productos</a>
 		</div>
-	</div>
 
 
 <?php require_once("inc/pie.php");?>
