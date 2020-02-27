@@ -13,6 +13,7 @@ $total=0;
 <div align="center">
 <ul class="list-group list-group-flush">
 <?php
+if(isset($_SESSION["email"])){
 foreach($_SESSION['carrito'] as $id => $cantidad){
 		$producto=seleccionarProducto($id);
 		
@@ -26,13 +27,20 @@ foreach($_SESSION['carrito'] as $id => $cantidad){
 		
 	<?php 
 
-	}?>
+	}
+	?>
 	</ul>
 	
 		<p>
 			<?php echo "<h1>Va a realizar el pedido de:  $total €</h1>";?>
 			<a href="pedidoConfirmado.php" class="btn btn-success ml-3">Confirmar Pedido</a>
 		</p>
+	<?php 
+	}else{
+		echo "<h2>DEBE INICIAR SESIÓN PARA PROCEDER CON EL PEDIDO.</h2><br/>";?>
+		<a href="login.php">INICIAR SESIÓN</a><?php
+	}?>
 	</div>
 </main>
+	
 	

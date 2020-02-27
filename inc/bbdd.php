@@ -422,7 +422,7 @@
 	
 	
 	//Funcion para seleccionar pedidos GRUPITO
-	function seleccionarPedido($idUsuario){
+	function seleccionarPedidos($idUsuario){
 		$con=conectarBD();
 		try{
 			$sql="SELECT * from pedidos where idUsuario=:idUsuario";
@@ -430,15 +430,45 @@
 			$stmt->bindParam(':idUsuario',$idUsuario);
 			$stmt->execute();
 			//Usamos fetch para UNA FILA y fetchAll para VARIAS FILAS
-			$row=$stmt->fetch(PDO::FETCH_ASSOC);
+			$row=$stmt->fetchAll(PDO::FETCH_ASSOC);
 		}
 		catch(PDOException $e){
-			echo "ERROR al iniciar sesión:".$e->getMessage();	
+			echo "ERROR al seleccionar pedido:".$e->getMessage();	
 			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
 			exit;
 		}
 		return $row;
 	}
+	
+	
+	
+	
+	/////////////////
+	function editarUsuarioGrupito($idUsuario,$email,$nombre,$apellidos,$direccion,$telefono){
+		$con=conectarBD();
+		try{
+			//$password=password_hash($password, PASSWORD_DEFAULT);
+			$sql="UPDATE usuarios SET idUsuario:=idUsuario, email=:email, nombre=:nombre, apellidos:=apellidos, direccion=:direccion, telefono:=telefono WHERE idUsuario=:idUsuario";
+			
+			$stmt = $con->prepare($sql);
+			
+			$stmt->bindParam(':idUsuario',$idUsuario);
+			$stmt->bindParam(':email',$email);
+			$stmt->bindParam(':nombre',$nombre);
+			$stmt->bindParam(':apellidos',$apellidos);
+			$stmt->bindParam(':direccion',$direccion);
+			$stmt->bindParam(':telefono',$telefono);
+			
+			$stmt->execute();
+		}
+		catch(PDOException $e){
+			echo "ERROR al editar usuario:".$e->getMessage();	
+			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
+			exit;
+		}
+
+	}
+	
 ?>	
 
 

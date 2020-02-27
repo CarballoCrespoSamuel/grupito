@@ -11,26 +11,28 @@ require_once("inc/funciones.php");?>
   	<?php
 	
 	$usuario=seleccionarEmail($_SESSION["email"]);
-	$idUsuario=$usuario["email"];
-	$pedido=seleccionarPedido($idUsuario);
-	
-	$idPedido=$pedido["idPedido"];
-	$fecha=$pedido["fecha"];
-	$total=$pedido["total"];
-	
-	
+	$idUsuario=$usuario["idUsuario"];
+	$pedidos=seleccionarPedidos($idUsuario);
 	?>
 	
 	<div class="jumbotron">
 		<div class="container">
 			<h1>Mis Pedidos</h1>
 			<hr />
+		<?php
+		foreach($pedidos as $pedido){ 
+			$idPedido=$pedido['idPedido'];
+			$fecha=$pedido['fecha'];
+			$total=$pedido['total'];?>
+		<p>
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item"><strong>ID: </strong> <?php echo $idPedido ; ?></li>
 				<li class="list-group-item"><strong>Fecha: </strong><?php echo $fecha;?></li>
-				<li class="list-group-item"><strong>Precio: </strong> <?php echo $total;?></li>
+				<li class="list-group-item"><strong>Precio: </strong> <?php echo $total;?> €</li>
 			</ul>
-			
+		</p>
+		<?php 
+		} ?>
 		</div>
 		<div>
 			<a href="editarMisDatos.php" class="btn btn-primary ml-3">Editar</a>
