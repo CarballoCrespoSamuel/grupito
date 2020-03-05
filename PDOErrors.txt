@@ -215,3 +215,14 @@
 27 February, 2020, 2:01 pm SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
 27 February, 2020, 2:02 pm SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
 27 February, 2020, 2:03 pm SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+27 February, 2020, 2:07 pm SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+27 February, 2020, 2:09 pm SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+27 February, 2020, 2:09 pm SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+2 March, 2020, 9:27 am SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+2 March, 2020, 9:30 am SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+2 March, 2020, 9:30 am SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+2 March, 2020, 10:13 am SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+2 March, 2020, 10:14 am SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+2 March, 2020, 10:14 am SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+2 March, 2020, 10:15 am SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+2 March, 2020, 10:15 am SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens

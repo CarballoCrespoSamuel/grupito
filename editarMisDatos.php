@@ -7,7 +7,7 @@ require_once("inc/encabezado.php");
 require_once("inc/configuracion.php");
 require_once("inc/funciones.php");?>
 
-<?php function imprimirFormulario($idUsuario,$email,$nombre,$apellidos,$direccion,$telefono){ ?>
+<?php function imprimirFormulario($idUsuario,$email,$nombre,$password,$apellidos,$direccion,$telefono){ ?>
 <form method="post">
 	<div class="jumbotron">
 	<label for="idUsuario">ID Usuario</label>
@@ -35,32 +35,32 @@ require_once("inc/funciones.php");?>
 <?php } 
 
 $email=$_SESSION["email"];
-
+$usuario=seleccionarEmail($email);
 if(empty($_REQUEST)){
-	
-	$usuario=seleccionarEmail($email);
-	
+	$password=$usuario["password"];
 	$idUsuario=$usuario["idUsuario"];
 	$nombre=$usuario["nombre"];
 	$apellidos=$usuario["apellidos"];
 	$direccion=$usuario["direccion"];
 	$telefono=$usuario["telefono"];
 	
-	imprimirFormulario($idUsuario,$email,$nombre,$apellidos,$direccion,$telefono);
+	imprimirFormulario($idUsuario,$email,$nombre,$password,$apellidos,$direccion,$telefono);
 	
 	}else{
-		$idUsuario=recoge("idUsuario");
-		$nombre=recoge("nombre");
-		$apellidos=recoge("apellidos");
-		$direccion=recoge("direccion");
-		$telefono=recoge("telefono");
-		$email=recoge("email");
+		$idUsuario=$_REQUEST["idUsuario"];
+		$nombre=$_REQUEST["nombre"];
 		
-		editarUsuarioGrupito($idUsuario,$email,$nombre,$apellidos,$direccion,$telefono);
+		$password=$usuario["password"];
+		$apellidos=$_REQUEST["apellidos"];
+		$direccion=$_REQUEST["direccion"];
+		$telefono=$_REQUEST["telefono"];
+		$email=$_REQUEST["email"];
+		
+		editarUsuarioGrupito($idUsuario,$email,$password,$nombre,$apellidos,$direccion,$telefono);
+		header("Location:misDatos.php");
 	}
 	
 	
-	//NO FUNCIONA
 require_once("inc/pie.php");?>
 
 

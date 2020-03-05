@@ -444,17 +444,19 @@
 	
 	
 	/////////////////
-	function editarUsuarioGrupito($idUsuario,$email,$nombre,$apellidos,$direccion,$telefono){
+	function editarUsuarioGrupito($idUsuario,$email,$password,$nombre,$apellidos,$direccion,$telefono){
 		$con=conectarBD();
 		try{
 			//$password=password_hash($password, PASSWORD_DEFAULT);
-			$sql="UPDATE usuarios SET idUsuario:=idUsuario, email=:email, nombre=:nombre, apellidos:=apellidos, direccion=:direccion, telefono:=telefono WHERE idUsuario=:idUsuario";
+			$sql="UPDATE usuarios SET idUsuario=:idUsuario, email=:email, password=:password, nombre=:nombre, apellidos=:apellidos, direccion=:direccion, telefono=:telefono WHERE idUsuario=:idUsuario";
 			
 			$stmt = $con->prepare($sql);
 			
 			$stmt->bindParam(':idUsuario',$idUsuario);
 			$stmt->bindParam(':email',$email);
 			$stmt->bindParam(':nombre',$nombre);
+			$stmt->bindParam(':password',$password);
+
 			$stmt->bindParam(':apellidos',$apellidos);
 			$stmt->bindParam(':direccion',$direccion);
 			$stmt->bindParam(':telefono',$telefono);
