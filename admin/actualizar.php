@@ -1,11 +1,10 @@
-<?php require_once ("inc/bbdd.php"); ?>
+<?php session_start();
+require_once ("inc/bbdd.php"); ?>
 <?php require_once ("inc/encabezado.php"); ?>
 <?php require_once ("inc/funciones.php"); 
 
 $idProducto=recoge("idProducto");
 $producto=seleccionarProducto($idProducto);
-
-print_r($producto);
 
 $idProducto=$producto["idProducto"];
 $nombre=$producto["nombre"];
@@ -53,11 +52,15 @@ function imprimirFormulario($idProducto,$nombre,$introDescripcion, $descripcion,
 	</div>
   
 	<button type="submit" class="btn btn-primary" name="guardar" value="guardar">Guardar</button>
-	<button type="submit" class="btn" name="productos" value="productos"><a href="../productos.php">Ver Productos</a></button>
-
+	<br/>
+	<a href="../productos.php">Ver Productos Usuarios</a><br/>
+	<a href="productos.php">Ver Productos Admin</a>
 </form> 
-<?php } ?>
+<?php } 
 
+
+if(isset($_SESSION["admin"])){ ?>
+	
 <main role="main" class="container">
 	<h1 class="mt-5">Actualizar Producto</h1>
 	<?php
@@ -92,7 +95,15 @@ function imprimirFormulario($idProducto,$nombre,$introDescripcion, $descripcion,
 		imprimirFormulario($idProducto,$nombre,$introDescripcion, $descripcion, $precio, $precioOferta,$imagen ,$online);
 	}
 	
-	?>
+?>
 </main>
-
-<?php require_once ("inc/pie.php"); ?>
+<?php 
+}else{
+	?>
+	<h1>
+		Inicia sesión ADMINISTRADOR para continuar. <a href="login.php">Iniciar sesión</a>
+	</h1>		
+<?php 			
+}
+require_once ("inc/pie.php"); ?>
+	

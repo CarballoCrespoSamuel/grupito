@@ -2,7 +2,7 @@
 
 <h1>INDEX</h1>
 <?php
-if(isset($_SESSION["usuario"])){
+if(isset($_SESSION["admin"])){
 ?>			
 	<?php require_once ("inc/encabezado.php"); ?>
 	<?php require_once ("inc/funciones.php"); 

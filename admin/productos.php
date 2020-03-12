@@ -5,7 +5,7 @@ $titulo="Todas Nuestras Ofertas";
 require_once ("inc/encabezado.php"); 
 require_once ("inc/funciones.php");
 
-if(isset($_SESSION["usuario"])){ 
+if(isset($_SESSION["admin"])){ 
 	
 	$productos=seleccionarTodosProductos();
 	$numProductos=count($productos);
@@ -26,6 +26,8 @@ if(isset($_SESSION["usuario"])){
 
 ?>
 <main role="main" class="container">
+<a href="../productos.php">Ver Productos Usuarios</a><br/>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -70,7 +72,7 @@ if(isset($_SESSION["usuario"])){
  
 <p>
 <nav aria-label="Page navigation example">
-  <ul class="pagination">
+  <ul class="pagination"> 
     <li class="page-item<?php if(1==$pagina){echo " disabled";}?>"><a class="page-link" href="productos.php?pagina=<?php echo $pagina-1; ?>">Anterior</a></li>
 	<?php 
 	for($i=1;$i<=$paginas;$i++){?>

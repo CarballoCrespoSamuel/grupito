@@ -4,6 +4,7 @@
 <?php 
 	function mostrarLogin(){ ?>
 		<form action="" method="post">
+			<h3>ADMINISTRADOR</h3>
 			<div class="form-group">
 				<label for="usuario">Usuario</label><br/>
 				<input type="usuario" class="form-control" name="usuario" id="usuario" maxlength="24" autofocus>
@@ -25,24 +26,14 @@
 		mostrarLogin();
 	}
 	else{
-		$_SESSION["usuario"]="$resultado[usuario]";
+		$usuario=$_REQUEST["usuario"];
+		$contrasena=$_REQUEST["password"];
+		if($usuario=="admin" and $contrasena=="abc123."){
+			$_SESSION["admin"]=$usuario;
 		header('Location:productos.php');
-		
-		/*
-		//SELECCIONAR LA LINEA DONDE SE ENCUENTRA EL USUARIO Y VERIFICAR QUE LAS CREDENCIALES SON CORRECTAS
-		$resultado=seleccionarUsuario($usuario);
-		$userOK=password_verify($password, $resultado['Password']);
-		if($userOK){
-			//Las credenciales son correctas 
-			$_SESSION["usuario"]="$resultado[usuario]";
-			header('Location: menu.php');?>
-		<?php
 		}else{
-			echo "<h1 class='mt-5'>INICIAR SESIÓN</h1>";
-			echo "INCORRECTO. PRUEBE OTRA VEZ.";
-			mostrarLogin();
+			header('Location:..\login.php');
 		}
-		*/	
 	}	
 ?>
 	</main>

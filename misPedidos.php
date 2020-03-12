@@ -29,7 +29,9 @@ require_once("inc/funciones.php");?>
 				<li class="list-group-item"><strong>ID: </strong> <?php echo $idPedido ; ?></li>
 				<li class="list-group-item"><strong>Fecha: </strong><?php echo $fecha;?></li>
 				<li class="list-group-item"><strong>Precio: </strong> <?php echo $total;?> €</li>
+				<a href="eliminarPedido.php" class="btn">Eliminar Pedido</a>
 			</ul>
+			
 		</p>
 		<?php 
 		} ?>

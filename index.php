@@ -9,7 +9,7 @@ require_once("inc/funciones.php");?>
 
 <?php $productos = seleccionarOfertasPortada(NUMOFERTAS);?>
 
-<main role="main">
+<main role="main" >
 
   <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
@@ -19,7 +19,6 @@ require_once("inc/funciones.php");?>
       <p><a class="btn btn-primary btn-lg" href="productos.php" role="button">Nuestras ofertas »</a></p>
     </div>
   </div>
-
   <div class="container">
    
 	
