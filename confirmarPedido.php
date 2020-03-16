@@ -44,3 +44,4 @@ foreach($_SESSION['carrito'] as $id => $cantidad){
 </main>
 	
 	
+<?php require_once("inc/pie.php");?>

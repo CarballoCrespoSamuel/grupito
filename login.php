@@ -20,35 +20,35 @@ function mostrarLogin($email){
 	<br/>
 
 	  <div class="form-group">
-		<label for="exampleInputEmail1">Correo</label>
-		<input class="form-control" name="email" id="email" aria-describedby="emailHelp" value="<?php echo "$email";?>">
+		<label for="email">Correo</label>
+		<input class="form-control" name="email" id="email"  value="<?php echo "$email";?>">
 	  </div>
 	  <div class="form-group">
-		<label for="exampleInputPassword1">Contraseña</label>
-		<input type="password" class="form-control" name="pass" id="pass">
+		<label for="pasword">Contraseña</label>
+		<input type="password" class="form-control" name="password" id="password">
 	  </div>
 	  <button type="submit" class="btn btn-primary">Enviar</button>
 	  <p>¿No tienes cuenta todavía?<a href="crearUsuario.php"> Regístrate</a></p>
 </form>
 </main>
 <?php }
-
+$email="";
+$password="";
 if(empty($_REQUEST)){
 		if(isset($_SESSION["email"])){
 			header('Location: index.php');
 		}else{
-			$email="";
 			mostrarLogin($email);
 		}
 	}
 	else{
 		$email=$_REQUEST["email"];
-		$pass=$_REQUEST["pass"];
+		$password=$_REQUEST["password"];
 		
 		//SELECCIONAR LA LINEA DONDE SE ENCUENTRA EL USUARIO Y VERIFICAR QUE LAS CREDENCIALES SON CORRECTAS
 		$resultado=seleccionarEmail($email);
 		
-		$userOK=password_verify("abc123.",$resultado['password']);
+		$userOK=password_verify($password,$resultado['password']);
 		
 		if($userOK){
 			//Las credenciales son correctas 

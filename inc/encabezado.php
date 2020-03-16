@@ -60,7 +60,7 @@
     <link href="./css/jumbotron.css" rel="stylesheet">
 	
   </head>
-  <body>
+  <body background="imagenesWeb\fondo.png">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 		<a class="navbar-brand" href="index.php">MiGrupito</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">

@@ -16,8 +16,7 @@ require_once("inc/funciones.php");
   <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
     <div class="container">
-      <h1 class="display-3">Tu Carrito!</h1>
-      <p >Tus artículos están listos!</p>
+      <h1 class="display-3">Tu Carrito! <i class="fas fa-cart-arrow-down"></i></h1>
       <p><a class="btn btn-primary btn-lg" href="productos.php" role="button">Seguir Comprando »</a></p>
     </div>
   </div>

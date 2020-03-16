@@ -15,10 +15,24 @@ require_once("inc/funciones.php");?>
 	$pedidos=seleccionarPedidos($idUsuario);
 	?>
 	
+	<script type="text/javascript">
+		function confimarBorrar(){
+			var respuesta = confirm("¿Está seguro/a de que quiere borrar su pedido?");
+			if(respuesta ==true){
+				return true;
+			}else{
+				return false;
+			}
+		}
+	</script>
+	
+	
+	
 	<div class="jumbotron">
 		<div class="container">
 			<h1>Mis Pedidos</h1>
 			<hr />
+		
 		<?php
 		foreach($pedidos as $pedido){ 
 			$idPedido=$pedido['idPedido'];
@@ -29,16 +43,16 @@ require_once("inc/funciones.php");?>
 				<li class="list-group-item"><strong>ID: </strong> <?php echo $idPedido ; ?></li>
 				<li class="list-group-item"><strong>Fecha: </strong><?php echo $fecha;?></li>
 				<li class="list-group-item"><strong>Precio: </strong> <?php echo $total;?> €</li>
-				<a href="eliminarPedido.php" class="btn">Eliminar Pedido</a>
+				<a href="eliminarPedido.php?idPedido=<?php echo "$idPedido";?>" class="btn btn-danger" onclick="return confimarBorrar()">Eliminar Pedido</a>
+			
 			</ul>
 			
 		</p>
 		<?php 
 		} ?>
 		</div>
-		<div>
-			<a href="editarMisDatos.php" class="btn btn-primary ml-3">Editar</a>
-			<a href="productos.php" class="btn btn-success ml-3">Volver a productos</a>
+		<div class="container">
+			<a href="productos.php" class="btn btn-success">Volver a productos</a>
 		</div>
 	</div>
 

@@ -333,6 +333,28 @@
 		return $row;
 	}
 	
+	
+	
+	
+	//Función para comprobas si un usuario existe antes de insertar un usuario con su contraseña EN GRUPITO
+	function comprobarUsuarioGrupito($email){
+		$con=conectarBD();
+		try{
+			$sql="SELECT email from usuarios where email=:email" ;
+			$stmt = $con->prepare($sql);
+			$stmt->bindParam(':email',$email);
+			$stmt->execute();
+			$row=$stmt->fetch(PDO::FETCH_ASSOC);
+		}
+		catch(PDOException $e){
+			echo "ERROR al Insertar usuario:".$e->getMessage();	
+			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
+			exit;
+		}
+		return $row;
+	}
+	
+	
 	//Función para insertar un usuario con su contraseña EN GRUPITO
 	function insertarUsuarioGrupito($email,$password,$nombre,$apellidos,$direccion,$telefono){
 		$con=conectarBD();
@@ -356,7 +378,6 @@
 			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
 			exit;
 		}
-
 	}
 	
 	
@@ -379,7 +400,7 @@
 		return $row;
 	}
 	
-	
+	//Insertar un pedido en la base de datos
 	function insertarPedido($idUsuario, $detallePedido, $total){
 		$conexion=conectarBD();
 		try{
@@ -414,6 +435,31 @@
 		catch(PDOException $e){
 			$conexion -> rollback();
 			echo "ERROR al Insertar pedido: ".$e->getMessage();	
+			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
+			exit;
+		}
+		return $idPedido;
+	}
+	
+	//Eliminar un pedido en la base de datos
+	function eliminarPedido($idPedido){
+		$conexion=conectarBD();
+		try{
+
+			$sql="DELETE FROM detallePedido WHERE idPedido=:idPedido";
+			$stmt = $conexion -> prepare($sql);
+			$stmt->bindParam( ':idPedido',$idPedido);
+			$stmt->execute();
+
+			
+			$sql="DELETE FROM pedidos WHERE idPedido=:idPedido";
+			$stmt = $conexion -> prepare($sql);	
+			$stmt->bindParam( ':idPedido',$idPedido);
+			$stmt->execute();
+		}
+		catch(PDOException $e){
+			$conexion -> rollback();
+			echo "ERROR al Eliminar pedido: ".$e->getMessage();	
 			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
 			exit;
 		}
