@@ -39,8 +39,8 @@ require_once("inc/funciones.php");?>
 		</div>
 		<br/>
 		<div class="container">
-			<a href="editarMisDatos.php" class="btn btn-primary ml-3">Editar</a>
-			<a href="productos.php" class="btn btn-success ml-3">Volver a productos</a>
+			<a href="editarMisDatos.php" class="btn btn-primary">Editar</a>
+			<a href="productos.php" class="btn btn-success">Volver a productos</a>
 		</div>
 
 		

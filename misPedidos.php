@@ -14,19 +14,16 @@ require_once("inc/funciones.php");?>
 	$idUsuario=$usuario["idUsuario"];
 	$pedidos=seleccionarPedidos($idUsuario);
 	?>
-	
-	<script type="text/javascript">
-		function confimarBorrar(){
-			var respuesta = confirm("¿Está seguro/a de que quiere borrar su pedido?");
-			if(respuesta ==true){
-				return true;
-			}else{
-				return false;
+		<script type="text/javascript">
+			function confirmarBorrar(){
+				var respuesta = confirm("¿Está seguro/a de que quiere borrar su pedido?");
+				if(respuesta ==true){
+					return true;
+				}else{
+					return false;
+				}
 			}
-		}
-	</script>
-	
-	
+		</script>
 	
 	<div class="jumbotron">
 		<div class="container">
@@ -43,7 +40,7 @@ require_once("inc/funciones.php");?>
 				<li class="list-group-item"><strong>ID: </strong> <?php echo $idPedido ; ?></li>
 				<li class="list-group-item"><strong>Fecha: </strong><?php echo $fecha;?></li>
 				<li class="list-group-item"><strong>Precio: </strong> <?php echo $total;?> €</li>
-				<a href="eliminarPedido.php?idPedido=<?php echo "$idPedido";?>" class="btn btn-danger" onclick="return confimarBorrar()">Eliminar Pedido</a>
+				<a href="eliminarPedido.php?idPedido=<?php echo "$idPedido";?>" class="btn btn-danger" onclick="return confirmarBorrar()">Eliminar Pedido</a>
 			
 			</ul>
 			

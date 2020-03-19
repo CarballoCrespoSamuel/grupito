@@ -15,7 +15,7 @@ require_once("inc/funciones.php");?>
   <div class="jumbotron">
     <div class="container">
       <h1 class="display-3">Bienvenido a Mi Gupito!</h1>
-      <p >La tienda con las mejores ofertas de internet que podrás compartir con tu amigos.</p>
+      <p >La tienda con las mejores ofertas.</p>
       <p><a class="btn btn-primary btn-lg" href="productos.php" role="button">Nuestras ofertas »</a></p>
     </div>
   </div>

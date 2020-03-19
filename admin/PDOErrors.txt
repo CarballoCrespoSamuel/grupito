@@ -18,3 +18,27 @@
 6 February, 2020, 1:33 pm SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
 6 February, 2020, 1:34 pm SQLSTATE[42S02]: Base table or view not found: 1146 Table 'grupito.tareas' doesn't exist
 6 February, 2020, 1:35 pm SQLSTATE[42S02]: Base table or view not found: 1146 Table 'grupito.grupito' doesn't exist
+17 March, 2020, 1:17 pm SQLSTATE[42S02]: Base table or view not found: 1146 Table 'grupito.producto' doesn't exist
+17 March, 2020, 2:00 pm SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'NULL, 3' at line 1
+17 March, 2020, 2:00 pm SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'NULL, 3' at line 1
+17 March, 2020, 2:00 pm SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'NULL, 3' at line 1
+18 March, 2020, 12:33 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'email'
+18 March, 2020, 12:33 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'email'
+18 March, 2020, 12:33 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'email'
+18 March, 2020, 12:33 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'email'
+18 March, 2020, 12:33 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'email'
+18 March, 2020, 12:34 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'email'
+18 March, 2020, 12:37 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'email'
+18 March, 2020, 12:37 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'email'
+18 March, 2020, 12:37 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'email'
+18 March, 2020, 12:37 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'email'
+18 March, 2020, 12:37 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'email'
+18 March, 2020, 12:38 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'email'
+18 March, 2020, 12:38 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'email'
+18 March, 2020, 12:38 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'email'
+18 March, 2020, 12:43 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'email'
+18 March, 2020, 12:43 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'email'
+18 March, 2020, 1:02 pm SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`grupito`.`pedidos`, CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`))
+18 March, 2020, 1:04 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'email'
+18 March, 2020, 1:04 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'email'
+18 March, 2020, 1:04 pm SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'email'

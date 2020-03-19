@@ -333,6 +333,191 @@
 		return $row;
 	}
 	
+	
+	
+	
+	//Función para comprobas si un usuario existe antes de insertar un usuario con su contraseña EN GRUPITO
+	function comprobarUsuarioGrupito($email){
+		$con=conectarBD();
+		try{
+			$sql="SELECT email from usuarios where email=:email" ;
+			$stmt = $con->prepare($sql);
+			$stmt->bindParam(':email',$email);
+			$stmt->execute();
+			$row=$stmt->fetch(PDO::FETCH_ASSOC);
+		}
+		catch(PDOException $e){
+			echo "ERROR al Insertar usuario:".$e->getMessage();	
+			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
+			exit;
+		}
+		return $row;
+	}
+	
+	
+	//Función para insertar un usuario con su contraseña EN GRUPITO
+	function insertarUsuarioGrupito($email,$password,$nombre,$apellidos,$direccion,$telefono){
+		$con=conectarBD();
+		try{
+			//$password=password_hash($password, PASSWORD_DEFAULT);
+			$sql="INSERT INTO usuarios(email,password,nombre,apellidos,direccion,telefono) VALUES(:email,:password,:nombre,:apellidos,:direccion,:telefono)";
+			
+			$stmt = $con->prepare($sql);
+			
+			$stmt->bindParam(':email',$email);
+			$stmt->bindParam(':password',$password);
+			$stmt->bindParam(':nombre',$nombre);
+			$stmt->bindParam(':apellidos',$apellidos);
+			$stmt->bindParam(':direccion',$direccion);
+			$stmt->bindParam(':telefono',$telefono);
+			
+			$stmt->execute();
+		}
+		catch(PDOException $e){
+			echo "ERROR al Insertar usuario:".$e->getMessage();	
+			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
+			exit;
+		}
+	}
+	
+	
+	//Funcion para seleccionar un usuario GRUPITO
+	function seleccionarEmail($email){
+		$con=conectarBD();
+		try{
+			$sql="SELECT * from usuarios where email=:email";
+			$stmt = $con->prepare($sql);
+			$stmt->bindParam(':email',$email);
+			$stmt->execute();
+			//Usamos fetch para UNA FILA y fetchAll para VARIAS FILAS
+			$row=$stmt->fetch(PDO::FETCH_ASSOC);
+		}
+		catch(PDOException $e){
+			echo "ERROR al iniciar sesión:".$e->getMessage();	
+			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
+			exit;
+		}
+		return $row;
+	}
+	
+	//Insertar un pedido en la base de datos
+	function insertarPedido($idUsuario, $detallePedido, $total){
+		$conexion=conectarBD();
+		try{
+			$conexion -> beginTransaction();//Necesito crear una transaccion por si da error, que pueda hacer ROLLBACK
+			$sql="INSERT INTO pedidos(idUsuario, total) VALUES(:idUsuario,:total)";
+			$stmt = $conexion -> prepare($sql);
+		
+			$stmt->bindParam( ':idUsuario',$idUsuario);
+			$stmt->bindParam(':total',$total);
+
+			$stmt->execute();
+			$idPedido=$conexion->lastInsertId();
+			
+			
+			foreach($detallePedido as $idProducto => $cantidad){
+				$producto=seleccionarProducto($idProducto);
+				$precio=$producto["precioOferta"];
+				$sql2= "INSERT INTO detallePedido(idPedido,idProducto,cantidad, precio) VALUES(:idPedido,:idProducto,:cantidad,:precio)";
+				
+				$sentencia = $conexion -> prepare($sql2);
+		
+				$sentencia->bindParam(':idPedido',$idPedido);
+				$sentencia->bindParam(':idProducto',$idProducto);
+				$sentencia->bindParam(':cantidad',$cantidad);
+				$sentencia->bindParam(':precio',$precio);
+				
+				$sentencia->execute();
+				
+			}
+			$conexion -> commit();
+		}
+		catch(PDOException $e){
+			$conexion -> rollback();
+			echo "ERROR al Insertar pedido: ".$e->getMessage();	
+			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
+			exit;
+		}
+		return $idPedido;
+	}
+	
+	//Eliminar un pedido en la base de datos
+	function eliminarPedido($idPedido){
+		$conexion=conectarBD();
+		try{
+
+			$sql="DELETE FROM detallePedido WHERE idPedido=:idPedido";
+			$stmt = $conexion -> prepare($sql);
+			$stmt->bindParam( ':idPedido',$idPedido);
+			$stmt->execute();
+
+			
+			$sql="DELETE FROM pedidos WHERE idPedido=:idPedido";
+			$stmt = $conexion -> prepare($sql);	
+			$stmt->bindParam( ':idPedido',$idPedido);
+			$stmt->execute();
+		}
+		catch(PDOException $e){
+			$conexion -> rollback();
+			echo "ERROR al Eliminar pedido: ".$e->getMessage();	
+			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
+			exit;
+		}
+		return $idPedido;
+	}
+	
+	
+	//Funcion para seleccionar pedidos GRUPITO
+	function seleccionarPedidos($idUsuario){
+		$con=conectarBD();
+		try{
+			$sql="SELECT * from pedidos where idUsuario=:idUsuario";
+			$stmt = $con->prepare($sql);
+			$stmt->bindParam(':idUsuario',$idUsuario);
+			$stmt->execute();
+			//Usamos fetch para UNA FILA y fetchAll para VARIAS FILAS
+			$row=$stmt->fetchAll(PDO::FETCH_ASSOC);
+		}
+		catch(PDOException $e){
+			echo "ERROR al seleccionar pedido:".$e->getMessage();	
+			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
+			exit;
+		}
+		return $row;
+	}
+	
+	
+	
+	
+	////Funcion para actualizar un USUARIO
+	function editarUsuarioGrupito($idUsuario,$email,$password,$nombre,$apellidos,$direccion,$telefono){
+		$con=conectarBD();
+		try{
+			//$password=password_hash($password, PASSWORD_DEFAULT);
+			$sql="UPDATE usuarios SET idUsuario=:idUsuario, email=:email, password=:password, nombre=:nombre, apellidos=:apellidos, direccion=:direccion, telefono=:telefono WHERE idUsuario=:idUsuario";
+			
+			$stmt = $con->prepare($sql);
+			
+			$stmt->bindParam(':idUsuario',$idUsuario);
+			$stmt->bindParam(':email',$email);
+			$stmt->bindParam(':nombre',$nombre);
+			$stmt->bindParam(':password',$password);
+
+			$stmt->bindParam(':apellidos',$apellidos);
+			$stmt->bindParam(':direccion',$direccion);
+			$stmt->bindParam(':telefono',$telefono);
+			
+			$stmt->execute();
+		}
+		catch(PDOException $e){
+			echo "ERROR al editar usuario:".$e->getMessage();	
+			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
+			exit;
+		}
+
+	}
+	
+	
 	//Funcion para actualizar PRODUCTO
 	function actualizarProducto($idProducto, $nombre, $introDescripcion, $descripcion, $imagen, $precio, $precioOferta, $online){
 		
@@ -363,30 +548,109 @@
 		}
 		return $stmt->rowCount();
 	}
-
-	//Funcion para borrar tarea 
-	function eliminarProducto($idTarea){
+	
+	
+	//Funcion para borrar un Producto 
+	function eliminarProducto($idProducto){
 		$con=conectarBD();
 		
 		try{
 			//Crear la sentencia
-			$sql="DELETE from tareas where idTarea=:idTarea";
+			$sql="DELETE from productos where idProducto=:idProducto";
 			//Preparamos la sentencia y creamos stmt
 			$stmt = $con->prepare($sql);
 			//Vinculamos los campos
-			$stmt->bindParam(':idTarea',$idTarea);
+			$stmt->bindParam(':idProducto',$idProducto);
 			//Ejecutamos
 			$stmt->execute();
 		}
 		catch(PDOException $e){
-			echo "ERROR al eliminar Tarea:".$e->getMessage();	
+			echo "ERROR al eliminar el producto:".$e->getMessage();	
 			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
 			exit;
 		}
 		return $stmt->rowCount();
 	}
 	
+	//Seleccionar todos los Usuarios
+	function seleccionarUsuariosGrupito(){
+		$con=conectarBD();
+		try{
+			$sql="SELECT * from usuarios";
+			$stmt = $con->prepare($sql);
+			$stmt->execute();
+			$rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
+			
+		}
+		catch(PDOException $e){
+			echo "ERROR al seleccionar todos los usuarios:".$e->getMessage();	
+			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
+			exit;
+		}
+		return $rows;
+	}
 	
+	//Seleccionar Usuarios para paginar
+	function seleccionarUsuariosPaginarGrupito($inicio, $usuariosPagina){
+		$con=conectarBD();
+		try{
+			$sql="SELECT * from usuarios LIMIT :inicio, :usuariosPagina";
+			$stmt = $con->prepare($sql);
+			$stmt->bindParam(':inicio',$inicio, PDO::PARAM_INT); //Porque necesitamos que sea INT
+			$stmt->bindParam(':usuariosPagina',$usuariosPagina, PDO::PARAM_INT);
+			$stmt->execute();
+			$rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
+			
+		}
+		catch(PDOException $e){
+			echo "ERROR al seleccionar usuarios para paginar:".$e->getMessage();	
+			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
+			exit;
+		}
+		return $rows;
+	}
+	
+	
+	//Funcion para borrar un Producto 
+	function eliminarUsuario($idUsuario){
+		$con=conectarBD();
+		
+		try{
+			//Crear la sentencia
+			$sql="DELETE from usuarios where idUsuario=:idUsuario";
+			//Preparamos la sentencia y creamos stmt
+			$stmt = $con->prepare($sql);
+			//Vinculamos los campos
+			$stmt->bindParam(':idUsuario',$idUsuario);
+			//Ejecutamos
+			$stmt->execute();
+		}
+		catch(PDOException $e){
+			echo "ERROR al eliminar el usuario:".$e->getMessage();	
+			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
+			exit;
+		}
+		return $stmt->rowCount();
+	}
+	
+	//Seleccionar Usuario
+	function seleccionarUsuarioGrupito($idUsuario){
+		$con=conectarBD();
+		try{
+			$sql="SELECT * from usuarios where idUsuario=:idUsuario";
+			$stmt = $con->prepare($sql);
+			$stmt->bindParam(':idUsuario',$idUsuario);
+			$stmt->execute();
+			//Usamos fetch para UNA FILA y fetchAll para VARIAS FILAS
+			$row=$stmt->fetch(PDO::FETCH_ASSOC);
+		}
+		catch(PDOException $e){
+			echo "ERROR al seleccionar usuario:".$e->getMessage();	
+			file_put_contents("PDOErrors.txt", "\r\n".date('j F, Y, g:i a ').$e->getMessage(), FILE_APPEND );
+			exit;
+		}
+		return $row;
+	}
 ?>	
 
 

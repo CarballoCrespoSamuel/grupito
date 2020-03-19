@@ -4,7 +4,9 @@ function mostrarProductos($productos){?>
  <!-- Example row of columns -->
 <div class="row row-cols-1 row-cols-md-3">
 
-<?php foreach($productos as $producto){ ?>
+<?php foreach($productos as $producto){ 
+//Para que solo muestre el producto si está activado como ONLINE
+if($producto["online"]==1){?>
   <div class="col mb-4">
     <div class="card h-100">
       <img src="imagenes/<?php echo $producto["imagen"];?>" class="card-img-top" alt="imagenes/<?php echo $producto["imagen"];?>">
@@ -16,7 +18,8 @@ function mostrarProductos($productos){?>
       </div>
     </div>
   </div> 
-<?php } ?>
+<?php }
+} ?>
 </div> <!-- col rows -->
 
 <?php } //	FIN de la funcion mostrar productos ?>

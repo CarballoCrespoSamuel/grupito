@@ -5,32 +5,13 @@ require_once ("inc/bbdd.php"); ?>
 
 if(isset($_SESSION["admin"])){ ?>
 <main>
-	<h1 class="mt-5">Borrar Tarea</h1>
+	<div class="container">
 	<?php 
-		$idTarea=recoge("idTarea");
-		
-		if($idTarea==""){
-				header("Location: index.php");
-				exit();
-		}
-		$ok=eliminarTarea($idTarea);
-		
-		if($ok){
-			echo "
-				<div class='alert alert-success' role='alert'>
-					Tarea $idTarea BORRADA correctamente.
-				</div>
-				";
-		}else{
-			echo "
-				<div class='alert alert-danger' role='alert'>
-					ERROR: Tarea NO BORRADA.
-				</div>	
-				";
-		}
-		
-		echo "<p><a href='index.php' class='btn btn-primary'>Volver al listado</a></p>"; 
+		$idProducto=$_REQUEST["idProducto"];
+		eliminarProducto($idProducto);
+		header("Location:productos.php");
 	?>
+	</div>
 </main>
 <?php 
 }else{?>

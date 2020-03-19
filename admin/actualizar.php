@@ -52,9 +52,6 @@ function imprimirFormulario($idProducto,$nombre,$introDescripcion, $descripcion,
 	</div>
   
 	<button type="submit" class="btn btn-primary" name="guardar" value="guardar">Guardar</button>
-	<br/>
-	<a href="../productos.php">Ver Productos Usuarios</a><br/>
-	<a href="productos.php">Ver Productos Admin</a>
 </form> 
 <?php } 
 

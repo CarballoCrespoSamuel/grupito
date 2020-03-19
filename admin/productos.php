@@ -1,10 +1,14 @@
 <?php session_start();
 require_once ("inc/bbdd.php");
 $pagina="productos";
-$titulo="Todas Nuestras Ofertas";
+$titulo="productos";
 require_once ("inc/encabezado.php"); 
 require_once ("inc/funciones.php");
+?>
 
+
+
+<?php 
 if(isset($_SESSION["admin"])){ 
 	
 	$productos=seleccionarTodosProductos();
@@ -19,14 +23,12 @@ if(isset($_SESSION["admin"])){
 	}else{
 			
 	}
-	
-	
+
 	$inicio=($pagina-1)*$productosPagina;
 	$productos=seleccionarProductosPaginar($inicio, $productosPagina);
 
 ?>
 <main role="main" class="container">
-<a href="../productos.php">Ver Productos Usuarios</a><br/>
 
 <table class="table table-striped">
   <thead>
@@ -34,9 +36,14 @@ if(isset($_SESSION["admin"])){
       <th scope="col">Nombre</th>
       <th scope="col">MiniDescripción</th>
       <th scope="col">Descripción</th>
+	  <th></th>
+	  <th></th>
+	  <th></th>
+	  <th></th>
 	  <th scope="col">Imágen</th>
 	  <th scope="col">Precio</th>
 	  <th scope="col">Oferta</th>
+	  <th scope="col">Online</th>
     </tr>
   </thead>
   <tbody>
@@ -55,13 +62,13 @@ if(isset($_SESSION["admin"])){
 		<tr>
 			<td><strong><?php echo "$nombre";?></strong></td>
 			<td><?php echo "$introDescripcion";?></td>
-			<td><?php echo "$descripcion";?></td>
+			<td colspan="5"><?php echo "$descripcion";?></td>
 			<td><img src='imagenes\<?php echo "$imagen";?>' width='300' height='150'></td>
 			<td><strike><?php echo "$precio";?>€</strike></td>
 			<td><?php echo "$precioOferta";?>€</td>
-			<!--Hacer una pagina aparte para actulizar y para "borrar"(online 0)-->
-			<td><a href="<?php echo "actualizar.php?idProducto="."$idProducto"?>" class='btn btn-success' role='alert'>Editar</a></td>
-			<td><a href="borrar.php?idProducto=<?php echo $idProducto;?>" onClick="return confirmar('¿Realmente quieres borrar el producto?');" class='btn btn-danger' role='alert'>Borrar</a></td>
+			<td><?php echo "$online";?></td>
+			<td><a href="<?php echo "actualizar.php?idProducto="."$idProducto"?>" class='btn btn-primary' role='alert'>Editar</a></td>
+			<td><a href="borrar.php?idProducto=<?php echo $idProducto;?>" onClick="return confirmarBorrar('¿Realmente quieres borrar el producto?');" class='btn btn-danger' role='alert'>Borrar</a></td>
 		</tr>
 	<?php 
 	}
@@ -71,7 +78,7 @@ if(isset($_SESSION["admin"])){
  
  
 <p>
-<nav aria-label="Page navigation example">
+<nav aria-label="nav">
   <ul class="pagination"> 
     <li class="page-item<?php if(1==$pagina){echo " disabled";}?>"><a class="page-link" href="productos.php?pagina=<?php echo $pagina-1; ?>">Anterior</a></li>
 	<?php 

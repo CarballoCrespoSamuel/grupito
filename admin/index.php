@@ -1,6 +1,5 @@
 <?php session_start(); ?>
 
-<h1>INDEX</h1>
 <?php
 if(isset($_SESSION["admin"])){
 ?>			
@@ -8,6 +7,7 @@ if(isset($_SESSION["admin"])){
 	<?php require_once ("inc/funciones.php"); 
 	header('Location:productos.php');
 }else{?>
+	<h1>INICIA SESIÓN COMO ADMIN</h1>
 	<a href="login.php">Iniciar sesión</a>
 <?php
 }

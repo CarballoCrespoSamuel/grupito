@@ -7,7 +7,9 @@ require_once("inc/encabezado.php");?>
 <?php require_once("inc/configuracion.php");?>
 <?php require_once("inc/funciones.php");?>
 
-<?php $productos = seleccionarTodasOfertas();?>
+<?php 
+	$productos = seleccionarTodasOfertas();
+?>
 <main role="main">
 
   <!-- Main jumbotron for a primary marketing message or call to action -->

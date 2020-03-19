@@ -18,7 +18,7 @@ if(isset($_SESSION["carrito"])){
 
 			$total=$total+$subtotal;
 			?>
-			<li class="list-group-item"><?php echo "<strong>$nombre</strong> "."($cantidad unidades)" ; ?></li>		
+			<!--<li class="list-group-item"><?php echo "<strong>$nombre</strong> "."($cantidad unidades)" ; ?></li>-->		
 			
 		<?php 
 
